@@ -16,8 +16,10 @@ def update_config(crosshair_id):
     else:
         print("Erreur lors de la récupération de la configuration")
 
-def main(crosshair_id):
+def main():
+    crosshair_id = input("Veuillez entrer l'ID du crosshair : ")
     print(f"Utilisation du crosshair ID: {crosshair_id}")
+
     while True:
         print("\n[1] - Centrer Le Crosshair")
         print("[2] - Mettre À Jour La Configuration")
@@ -37,9 +39,4 @@ def main(crosshair_id):
         time.sleep(1)
 
 if __name__ == "__main__":
-    if len(sys.argv) < 2:
-        print("Usage: python crosshair.py [crosshair_id]")
-        sys.exit(1)
-
-    crosshair_id = sys.argv[1]
-    main(crosshair_id)
+    main()
