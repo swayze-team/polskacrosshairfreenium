@@ -1,6 +1,7 @@
 import sys
 import requests
 import pyautogui
+import time
 
 def center_crosshair():
     screen_width, screen_height = pyautogui.size()
@@ -15,18 +16,30 @@ def update_config(crosshair_id):
     else:
         print("Erreur lors de la récupération de la configuration")
 
+def main(crosshair_id):
+    print(f"Utilisation du crosshair ID: {crosshair_id}")
+    while True:
+        print("\n[1] - Centrer Le Crosshair")
+        print("[2] - Mettre À Jour La Configuration")
+        print("[3] - Déconnecter")
+        choice = input("Entrez Le Numéro d'Option : ")
+
+        if choice == "1":
+            center_crosshair()
+        elif choice == "2":
+            update_config(crosshair_id)
+        elif choice == "3":
+            print("Déconnexion...")
+            break
+        else:
+            print("Option invalide. Veuillez réessayer.")
+        
+        time.sleep(1)
+
 if __name__ == "__main__":
     if len(sys.argv) < 2:
-        print("Usage: python crosshair.py [center|update] [crosshair_id]")
+        print("Usage: python crosshair.py [crosshair_id]")
         sys.exit(1)
 
-    command = sys.argv[1]
-    if command == "center":
-        center_crosshair()
-    elif command == "update":
-        if len(sys.argv) < 3:
-            print("Veuillez fournir l'ID du crosshair pour la mise à jour")
-            sys.exit(1)
-        update_config(sys.argv[2])
-    else:
-        print("Commande non reconnue")
+    crosshair_id = sys.argv[1]
+    main(crosshair_id)
